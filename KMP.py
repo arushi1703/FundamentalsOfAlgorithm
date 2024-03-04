@@ -12,27 +12,23 @@ def LPS(pattern):
         copy+=i
 
 def find(string,pattern):
-    print(lps)
-    flag=0
     if len(string)<len(pattern):
         return "Match not found"
+    flag=0
     i=0
     j=-1
     while i<len(string):
         if string[i]==pattern[j+1]:
-           i+=1
-           j+=1
+            i+=1
+            j+=1
         else:
-            j=lps[j-1]
-            if j==0:
+            j=lps[j]
+            if string[i]!=pattern[j+1]:
                 i+=1
-
-        if(j==len(pattern)-1):
-            flag=1
-            break
-    if(flag==1):
-        return f"Match found at {i-j} position"
-    return "Match not found"
+        if j==len(pattern)-1:
+            return f"Match found at index{i-j-1}"
+        if i==len(string):
+            return "Match not found"
 
 string="ababcabcabababd"
 pattern="ababd"
